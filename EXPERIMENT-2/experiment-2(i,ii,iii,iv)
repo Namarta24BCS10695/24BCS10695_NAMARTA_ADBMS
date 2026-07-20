@@ -1,0 +1,25 @@
+(i).
+/* Write a query using union to stack the table 'Arts' over 'Science' and output the final table */
+ SELECT * FROM Arts
+ UNION
+ SELECT * FROM Science;
+
+(ii).
+select emp_name
+from employee
+union all 
+select emp_name
+from pt_employee
+
+(iii).
+/* Write a query to find the list of fruits available in the supermarket.
+(f_name column has the name of the fruits and inv_name has the name of inventories, you are suppose to output the name of the fruits.)*/
+ SELECT f_name FROM fruit
+  INTERSECT
+ SELECT  inv_name FROM inventory;
+
+(iv).
+/* Write a query to output the name of the fruits (f_name) from the table 'fruit' which are not present in the table  inventory(f_name column has the name of the fruits and inv_name has the name of the items in inventory). */
+ SELECT f_name FROM fruit
+    EXCEPT
+ SELECT  inv_name FROM inventory;

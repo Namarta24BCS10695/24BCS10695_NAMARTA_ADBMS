@@ -1,0 +1,102 @@
+4.1
+-- Customers and Orders: List the customer_name and order_date for all customers who have placed orders.
+
+-- All Customers and Their Orders: List all customer names and their corresponding product_name from orders, if they have any. Include customers even if they haven't placed any orders.
+
+-- Find Products and Their Orders: Display Product Name and the order_date from all the products that are ordered.
+
+SELECT c.customer_name, o.order_date
+FROM customers c
+INNER JOIN orders o ON c.customer_id = o.customer_id;
+
+SELECT c.customer_name, o.product_name
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id;
+
+SELECT p.product_name, o.order_date
+FROM products p
+INNER JOIN orders o ON p.product_name = o.product_name; 
+
+
+
+4.2
+/* Write a query to do the following:
+ - JOIN the tables 'student' and 'course' using 'Course_id' to match both the tables and output the joined table.
+ - LEFT JOIN the tables 'student' and 'course' using 'Course_id' to match both the tables and output the joined table. */
+SELECT *
+FROM student
+JOIN course
+ON student.Course_id = course.Course_id;
+
+SELECT *
+FROM student
+LEFT JOIN course
+ON student.Course_id = course.Course_id;
+
+
+4.3
+-- 1.All orders with Customers Details: Get all of the orders table and also the details of respective customers if they exist. Use the customer and orders table.
+
+-- 2.Products and Categories: Create a combined list of all products and all categories. Include all product names and all category names. Where there's a match, show both; otherwise, use NULLs.
+
+-- 3.All category names with product details: display category_name, along with all product names and price from all the categories present in categories table.
+
+SELECT c.customer_name, o.*
+FROM customers c
+RIGHT JOIN orders o ON c.customer_id = o.customer_id;
+
+SELECT p.product_name, c.category_name
+FROM products p
+FULL OUTER JOIN categories c ON p.category_id = c.category_id;
+
+SELECT c.category_name, p.product_name, p.price
+FROM products p
+RIGHT JOIN categories c ON p.category_id = c.category_id;
+
+
+4.4
+-- Write a query to do the following:
+
+-- FULL OUTER JOIN the 'student' and 'course' tables using 'Course_id' to match the tables. Output the joined SELECT * FROM 
+SELECT *
+FROM student
+FULL OUTER JOIN course
+ON student.Course_id = course.Course_id;
+
+4.5
+-- 1.Employee and Manager Names: Display a list of employee names along with their manager's names. Use the 'employees' table provided.
+
+-- 2.Every Possible Combination: Show every possible combination of 'customer_name' from the 'customers' table and 'product_name' from the 'products' table.
+SELECT E1.employee_NAME AS Employee , E2.employee_NAME AS Manager
+FROM employees AS E1
+left JOIN employees AS E2
+ON E1.Manager_ID=E2.employee_ID;
+
+SELECT C1.customer_name,P1.product_name FROM customers AS C1
+cross JOIN products AS P1
+
+
+4.6
+-- Part 1: Find pairs of students that belong to the same department
+SELECT 
+    s1.St_id,
+    s1.St_Name,
+    s1.Department,
+    s2.St_id,
+    s2.St_Name,
+    s2.Department
+FROM student AS s1
+INNER JOIN student AS s2
+ON s1.Department = s2.Department
+AND s1.St_id != s2.St_id;
+
+-- Part 2: Identify students who have chosen the same Course_id as their favorite
+SELECT DISTINCT
+    s1.St_id,
+    s1.St_Name,
+    s1.Course_id
+FROM student AS s1
+INNER JOIN student AS s2
+ON s1.Course_id = s2.Course_id
+AND s1.St_id != s2.St_id
+ORDER BY s1.Course_id;
